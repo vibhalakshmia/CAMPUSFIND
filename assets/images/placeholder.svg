@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="260" viewBox="0 0 400 260">
+  <rect width="400" height="260" fill="#f1f5f9" />
+  <circle cx="200" cy="110" r="48" fill="#e2e8f0" />
+  <path d="M185 110 L195 125 L215 95" stroke="#94a3b8" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  <text x="200" y="185" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#64748b">CAMPUS LOST &amp; FOUND</text>
+  <text x="200" y="208" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" text-anchor="middle" fill="#94a3b8">Photo Not Available</text>
+</svg>

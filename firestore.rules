@@ -1,0 +1,49 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions for authentication and ownership
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // User Profile Documents: /users/{userId}
+    // - Authenticated students can only read and write their own profile
+    // - Passwords must NEVER be stored in Firestore
+    // - Direct client deletion of accounts is blocked
+    match /users/{userId} {
+      allow read: if isOwner(userId);
+      allow create, update: if isOwner(userId) 
+                            && !('password' in request.resource.data);
+      allow delete: if false;
+    }
+
+    // Lost Item Reports: /lost_items/{itemId}
+    // - Authenticated campus users can read lost item reports for search and discovery
+    // - Only authenticated campus users can create reports under their own authenticated UID
+    // - Only the owner (reportedByUid == request.auth.uid) can update or delete their report
+    match /lost_items/{itemId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() 
+                    && request.resource.data.reportedByUid == request.auth.uid;
+      allow update, delete: if isAuthenticated() 
+                    && resource.data.reportedByUid == request.auth.uid;
+    }
+
+    // Found Item Reports: /found_items/{itemId}
+    // - Authenticated campus users can read found item reports for search and claiming
+    // - Only authenticated campus users can create reports under their own authenticated UID
+    // - Only the owner (reportedByUid == request.auth.uid) can update or delete their report
+    match /found_items/{itemId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() 
+                    && request.resource.data.reportedByUid == request.auth.uid;
+      allow update, delete: if isAuthenticated() 
+                    && resource.data.reportedByUid == request.auth.uid;
+    }
+  }
+}

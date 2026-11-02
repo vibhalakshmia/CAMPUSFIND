@@ -1,0 +1,31 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // Helper functions for authentication and ownership
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isValidImage() {
+      return request.resource.contentType.matches('image/(jpeg|jpg|png|webp)')
+             && request.resource.size <= 5 * 1024 * 1024;
+    }
+
+    // Reports item photo uploads: /reports/{userId}/{fileName}
+    // - Anyone (including authenticated campus users) can view item photos in search and details
+    // - Only the authenticated reporter (matching {userId}) can upload images to their own directory
+    // - Uploaded files must be valid image formats (JPEG, PNG, WebP) and <= 5MB
+    // - Only the verified owner can delete or overwrite their own images
+    match /reports/{userId}/{fileName} {
+      allow read: if true;
+      allow create: if isOwner(userId) && isValidImage();
+      allow update: if isOwner(userId) && isValidImage();
+      allow delete: if isOwner(userId);
+    }
+  }
+}

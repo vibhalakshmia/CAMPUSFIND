@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search & Filter Items | CampusFind</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Top Campus Banner -->
+  <aside class="demo-banner">
+    <span class="badge" style="background: #2563eb;">Campus Notice</span>
+    <span>Connected to Cloud Firestore. Live campus lost and found items catalog.</span>
+  </aside>
+
+  <!-- Sticky Modern Navigation -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+          </svg>
+        </div>
+        <div>
+          <span>CampusFind</span>
+          <span class="brand-sub">College Lost &amp; Found</span>
+        </div>
+      </a>
+
+      <button class="mobile-toggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="report-lost.html" class="nav-link">Report Lost</a>
+        <a href="report-found.html" class="nav-link">Report Found</a>
+        <a href="search.html" class="nav-link active">Search Items</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+
+        <div class="mobile-nav-actions">
+          <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
+          <a href="register.html" class="btn btn-primary btn-sm">Register</a>
+        </div>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
+        <a href="register.html" class="btn btn-primary btn-sm">Register</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content section">
+    <div class="container">
+      <!-- Page Header -->
+      <div style="margin-bottom: 2rem;">
+        <span class="badge-pill" style="background: #eff6ff; color: #2563eb; margin-bottom: 0.5rem;">Campus Directory</span>
+        <h1 class="section-title">Search Lost &amp; Found Items</h1>
+        <p class="section-subtitle" style="margin-bottom: 1.5rem;">Filter by item title, category, campus location, or listing status directly in your browser.</p>
+      </div>
+
+      <!-- Filter Control Panel -->
+      <div class="filter-panel">
+        <div class="filter-grid">
+          <!-- Text Search Query -->
+          <div class="form-group">
+            <label for="searchQuery" class="form-label">Search Keywords</label>
+            <input type="text" id="searchQuery" class="form-control" placeholder="Search by name, brand, color, or description...">
+          </div>
+
+          <!-- Report Type Filter -->
+          <div class="form-group">
+            <label for="filterType" class="form-label">Report Type</label>
+            <select id="filterType" class="form-control">
+              <option value="all">All (Lost &amp; Found)</option>
+              <option value="lost">Lost Items Only</option>
+              <option value="found">Found Items Only</option>
+            </select>
+          </div>
+
+          <!-- Category Filter -->
+          <div class="form-group">
+            <label for="filterCategory" class="form-label">Category</label>
+            <select id="filterCategory" class="form-control">
+              <option value="all">All Categories</option>
+            </select>
+          </div>
+
+          <!-- Campus Location Filter -->
+          <div class="form-group">
+            <label for="filterLocation" class="form-label">Location Area</label>
+            <select id="filterLocation" class="form-control">
+              <option value="all">All Locations</option>
+            </select>
+          </div>
+
+          <!-- Status Filter -->
+          <div class="form-group">
+            <label for="filterStatus" class="form-label">Status</label>
+            <select id="filterStatus" class="form-control">
+              <option value="all">All Statuses</option>
+              <option value="active">Active Reports</option>
+              <option value="claimed">Claimed / Reunited</option>
+              <option value="under_verification">Under Verification</option>
+            </select>
+          </div>
+
+          <!-- Sort Order -->
+          <div class="form-group">
+            <label for="filterSort" class="form-label">Sort Order</label>
+            <select id="filterSort" class="form-control">
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+            </select>
+          </div>
+
+          <!-- Reset Button -->
+          <div class="form-group" style="justify-content: flex-end;">
+            <button id="resetFiltersBtn" class="btn btn-secondary btn-block" title="Clear all search filters">
+              Reset Filters
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Meta Bar -->
+      <div class="results-meta">
+        <span id="resultsCount" class="results-count">Loading items...</span>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <span style="font-size: 0.85rem; color: #64748b;">Missing an item?</span>
+          <a href="report-lost.html" class="btn btn-danger btn-sm">+ Report Lost</a>
+          <a href="report-found.html" class="btn btn-success btn-sm">+ Report Found</a>
+        </div>
+      </div>
+
+      <!-- Data Source Notice Banner -->
+      <div id="searchSourceNotice" style="display: none; margin-bottom: 1.5rem;"></div>
+
+      <!-- Item Cards Grid -->
+      <div id="itemsGrid" class="items-grid">
+        <!-- Rendered dynamically via js/search.js -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="padding-top: 0; border: none;">
+        <div>&copy; 2026 CampusFind - College Lost & Found System.</div>
+        <div>Built with HTML5, CSS3, &amp; Vanilla JavaScript.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/mock-data.js"></script>
+  <script src="js/storage.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script type="module" src="js/firestore-service.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/search.js"></script>
+</body>
+</html>

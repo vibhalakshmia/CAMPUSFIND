@@ -1,0 +1,213 @@
+/* ==========================================================================
+   CampusFind - College Cloud-Based Lost and Found System
+   Responsive Media Queries (CSS3)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Tablets and Medium Screens (max-width: 992px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 992px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2.5rem;
+  }
+
+  .hero-lead {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-cta-group {
+    justify-content: center;
+  }
+
+  .hero-card {
+    max-width: 540px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .stat-item:nth-child(2) {
+    border-right: none;
+  }
+
+  .steps-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
+    gap: 2.5rem;
+  }
+
+  .filter-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .filter-grid .form-group:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .dashboard-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Devices & Small Screens (max-width: 768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .demo-banner {
+    font-size: 0.75rem;
+    padding: 0.5rem;
+  }
+
+  /* Mobile Navigation Hamburger Menu */
+  .mobile-toggle {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: calc(var(--nav-height) + 36px);
+    left: 0;
+    right: 0;
+    background-color: var(--white);
+    border-bottom: 2px solid var(--gray-200);
+    box-shadow: var(--shadow-xl);
+    flex-direction: column;
+    padding: 1.25rem 1.5rem;
+    gap: 0.5rem;
+    transform: translateY(-150%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 999;
+  }
+
+  .nav-menu.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-link {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+  }
+
+  .nav-actions {
+    display: none; /* Login / Register buttons moved into mobile menu via JS or duplicate in menu */
+  }
+
+  .nav-menu .mobile-nav-actions {
+    display: flex !important;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--gray-200);
+    margin-top: 0.5rem;
+  }
+
+  .hero {
+    padding: 3rem 0 3.5rem 0;
+  }
+
+  .hero-title {
+    font-size: 2.25rem;
+  }
+
+  .hero-lead {
+    font-size: 1rem;
+  }
+
+  .section {
+    padding: 3rem 0;
+  }
+
+  .section-title {
+    font-size: 1.65rem;
+  }
+
+  .form-card {
+    padding: 1.5rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .toast {
+    min-width: calc(100vw - 32px);
+  }
+
+  .toast-container {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Extra Small Devices (max-width: 480px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.85rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-item {
+    border-right: none;
+    border-bottom: 1px solid var(--gray-200);
+    padding-bottom: 1rem;
+  }
+
+  .stat-item:last-child {
+    border-bottom: none;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+  }
+
+  .items-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content {
+    margin: 1rem;
+    max-height: 85vh;
+  }
+}

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusFind | College Lost & Found System</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Top Campus Banner -->
+  <aside class="demo-banner">
+    <span class="badge" style="background: #2563eb;">Campus Notice</span>
+    <span>Connected to Cloud Firestore and Firebase Authentication. Search, report, and recover campus belongings.</span>
+  </aside>
+
+  <!-- Sticky Modern Navigation -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+          </svg>
+        </div>
+        <div>
+          <span>CampusFind</span>
+          <span class="brand-sub">College Lost &amp; Found</span>
+        </div>
+      </a>
+
+      <button class="mobile-toggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="report-lost.html" class="nav-link">Report Lost</a>
+        <a href="report-found.html" class="nav-link">Report Found</a>
+        <a href="search.html" class="nav-link">Search Items</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+
+        <div class="mobile-nav-actions">
+          <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
+          <a href="register.html" class="btn btn-primary btn-sm">Register</a>
+        </div>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Filled dynamically by main.js if logged in or out -->
+        <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
+        <a href="register.html" class="btn btn-primary btn-sm">Register</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div>
+          <div class="hero-pill">
+            Official Campus Community Portal
+          </div>
+          <h1 class="hero-title">
+            Lost something on campus?<br>
+            <span>We'll help you find it.</span>
+          </h1>
+          <p class="hero-lead">
+            The central digital platform connecting students, faculty, and campus security. Report missing belongings, match found property, and reclaim items quickly and securely.
+          </p>
+          <div class="hero-cta-group">
+            <a href="report-lost.html" class="btn btn-danger btn-lg">
+              Report Lost Item
+            </a>
+            <a href="report-found.html" class="btn btn-success btn-lg">
+              Report Found Item
+            </a>
+            <a href="search.html" class="btn btn-secondary btn-lg" style="background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.3);">
+              Browse All Listings
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero Quick Search Card -->
+        <div class="hero-card">
+          <h3>
+            Quick Item Search
+          </h3>
+          <p style="font-size: 0.875rem; color: #64748b; margin-bottom: 1.25rem;">
+            Search our catalog of misplaced cards, calculators, electronics, and keys across campus.
+          </p>
+          <form id="heroSearchForm" class="hero-search-box">
+            <div class="form-group">
+              <label for="heroSearchInput" class="form-label">Search by Item Keyword</label>
+              <input type="text" id="heroSearchInput" class="form-control" placeholder="e.g. Casio calculator, ID card, blue keys..." required>
+            </div>
+            <div class="form-group">
+              <label for="heroCategorySelect" class="form-label">Category</label>
+              <select id="heroCategorySelect" class="form-control">
+                <option value="all">All Categories</option>
+                <option value="Electronics">Electronics</option>
+                <option value="IDs & Cards">IDs & Cards</option>
+                <option value="Keys">Keys</option>
+                <option value="Books & Study Material">Books & Study Material</option>
+                <option value="Bottles & Bags">Bottles & Bags</option>
+                <option value="Wallets & Purses">Wallets & Purses</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              Find Matching Items
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Banner -->
+    <section class="stats-banner">
+      <div class="container stats-grid">
+        <div class="stat-item">
+          <div id="heroStatTotal" class="stat-number">120+</div>
+          <div class="stat-label">Items Documented</div>
+        </div>
+        <div class="stat-item">
+          <div id="heroStatClaimed" class="stat-number">88</div>
+          <div class="stat-label">Reunited with Owners</div>
+        </div>
+        <div class="stat-item">
+          <div id="heroStatOpen" class="stat-number">32</div>
+          <div class="stat-label">Active Listings</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" style="color: #10b981;">94%</div>
+          <div class="stat-label">Campus Resolution Rate</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section how-it-works">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge-pill" style="background: #e0f2fe; color: #0284c7; margin-bottom: 0.75rem;">Simple Process</span>
+          <h2 class="section-title">How CampusFind Works</h2>
+          <p class="section-subtitle">A transparent 3-step workflow to recover lost belongings across academic blocks, libraries, and hostels.</p>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <div class="step-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+            </div>
+            <h3 class="step-title">File a Detailed Report</h3>
+            <p class="step-desc">
+              Whether you lost an item or discovered something unattended, submit a report with photos, location, and date.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <div class="step-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </div>
+            <h3 class="step-title">Instant Search & Match</h3>
+            <p class="step-desc">
+              Browse campus listings filtered by classroom, library or cafe. The system categorizes reports for rapid discovery.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <div class="step-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <h3 class="step-title">Verify & Reclaim Safely</h3>
+            <p class="step-desc">
+              Present your student identification and claim your belonging at designated campus security helpdesks.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recent Lost & Found Items Grid -->
+    <section class="section">
+      <div class="container">
+        <div style="display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <span class="badge-pill" style="background: #f1f5f9; color: #475569; margin-bottom: 0.5rem;">Live Activity</span>
+            <h2 class="section-title" style="margin-bottom: 0;">Recent Campus Reports</h2>
+          </div>
+          <a href="search.html" class="btn btn-secondary">
+            View All Reports &rarr;
+          </a>
+        </div>
+
+        <!-- Dynamic Item Cards -->
+        <div id="recentItemsGrid" class="items-grid">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Campus Security Trust Callout -->
+    <section class="section" style="background: #f1f5f9; border-top: 1px solid #e2e8f0;">
+      <div class="container" style="text-align: center; max-width: 800px;">
+        <div style="width: 56px; height: 56px; border-radius: 50%; background: #e2e8f0; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem auto; color: #334155;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <h2 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem;">Campus Security Integration</h2>
+        <p style="font-size: 1rem; color: #475569; line-height: 1.6; margin-bottom: 1.5rem;">
+          Found valuable items like laptops, wallets, and government IDs should be deposited at the Central Security Desk (Admin Block, Room 102). You will receive an official custody receipt.
+        </p>
+        <div style="display: inline-flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+          <a href="report-lost.html" class="btn btn-primary">File a Lost Item</a>
+          <a href="report-found.html" class="btn btn-secondary">File a Found Item</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4>CampusFind Portal</h4>
+          <p>
+            An open student-driven lost and found initiative. Designed to reduce property loss across college lecture halls, laboratories, dorms, and recreation centers.
+          </p>
+          <div style="font-size: 0.85rem; color: #94a3b8;">
+            University Campus Services Building, Gate #2<br>
+            Emergency Security Desk: ext. 4400
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Quick Links</h5>
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="report-lost.html">Report Lost Item</a>
+            <a href="report-found.html">Report Found Item</a>
+            <a href="search.html">Search Directory</a>
+            <a href="dashboard.html">Student Dashboard</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Categories</h5>
+          <div class="footer-links">
+            <a href="search.html?category=Electronics">Electronics</a>
+            <a href="search.html?category=IDs+%26+Cards">Student ID Cards</a>
+            <a href="search.html?category=Keys">Room & Dorm Keys</a>
+            <a href="search.html?category=Books+%26+Study+Material">Study Material</a>
+            <a href="search.html?category=Bottles+%26+Bags">Bottles & Bags</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Campus Security</h5>
+          <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 0.75rem;">
+            Admin Block, Room 102. Mon–Fri, 8:00 AM – 6:00 PM.
+          </p>
+          <p style="font-size: 0.825rem; color: #64748b;">
+            Physical property verification requires valid campus photo ID.
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 CampusFind - College Cloud-Based Lost & Found Project.
+        </div>
+        <div>
+          Built with HTML5, CSS3, &amp; Vanilla JavaScript.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/mock-data.js"></script>
+  <script src="js/storage.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script type="module" src="js/firestore-service.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Initialize Home Page specific components
+    document.addEventListener('DOMContentLoaded', () => {
+      // Hero Search Form submission
+      const heroForm = document.getElementById('heroSearchForm');
+      if (heroForm) {
+        heroForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const q = document.getElementById('heroSearchInput').value.trim();
+          const category = document.getElementById('heroCategorySelect').value;
+          let targetUrl = `search.html?q=${encodeURIComponent(q)}`;
+          if (category !== 'all') {
+            targetUrl += `&category=${encodeURIComponent(category)}`;
+          }
+          window.location.href = targetUrl;
+        });
+      }
+
+      // Update Hero Stats dynamically from StorageService
+      const stats = StorageService.getStats();
+      const statTotal = document.getElementById('heroStatTotal');
+      const statClaimed = document.getElementById('heroStatClaimed');
+      const statOpen = document.getElementById('heroStatOpen');
+
+      if (statTotal) statTotal.textContent = stats.total;
+      if (statClaimed) statClaimed.textContent = stats.resolved || stats.claimed;
+      if (statOpen) statOpen.textContent = stats.active || stats.open;
+
+      // Populate Recent Items (first 6 items)
+      const recentGrid = document.getElementById('recentItemsGrid');
+      if (recentGrid) {
+        const items = StorageService.getItems().slice(0, 6);
+        recentGrid.innerHTML = items.map(item => renderItemCard(item)).join('');
+      }
+    });
+  </script>
+</body>
+</html>

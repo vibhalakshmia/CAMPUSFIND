@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report Lost Item | CampusFind</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Top Campus Banner -->
+  <aside class="demo-banner">
+    <span class="badge" style="background: #2563eb;">Campus Notice</span>
+    <span>Connected to Cloud Firestore. File a report to make your lost belonging searchable across campus.</span>
+  </aside>
+
+  <!-- Sticky Modern Navigation -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+          </svg>
+        </div>
+        <div>
+          <span>CampusFind</span>
+          <span class="brand-sub">College Lost &amp; Found</span>
+        </div>
+      </a>
+
+      <button class="mobile-toggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="report-lost.html" class="nav-link active">Report Lost</a>
+        <a href="report-found.html" class="nav-link">Report Found</a>
+        <a href="search.html" class="nav-link">Search Items</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+
+        <div class="mobile-nav-actions">
+          <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
+          <a href="register.html" class="btn btn-primary btn-sm">Register</a>
+        </div>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
+        <a href="register.html" class="btn btn-primary btn-sm">Register</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content section">
+    <div class="container">
+      <div class="form-card">
+        <div class="form-header">
+          <span class="badge-pill" style="background: #fee2e2; color: #b91c1c; margin-bottom: 0.5rem;">Lost Item Report</span>
+          <h2>Report a Lost Item</h2>
+          <p>Fill out the details below. Once submitted, your listing will be visible in the campus search directory so anyone who finds it can notify you or security.</p>
+        </div>
+
+        <div class="alert alert-info" style="margin-bottom: 1.5rem;">
+          <div>
+            <strong>Helpful Tip:</strong> Include distinct characteristics such as engravings, laptop serial suffixes, stickers, or brand models.
+          </div>
+        </div>
+
+        <!-- Success Feedback Container -->
+        <div id="formSuccessAlert" style="display: none; text-align: center; padding: 2.5rem 1.5rem; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 12px; margin-bottom: 2rem;">
+          <div style="width: 54px; height: 54px; border-radius: 50%; background: #dcfce7; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.75rem auto; color: #15803d;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <h3 style="color: #065f46; font-size: 1.5rem; margin-bottom: 0.5rem;">Lost Item Report Submitted!</h3>
+          <p style="color: #047857; margin-bottom: 1.5rem; font-size: 0.95rem;">
+            Your report has been saved to Cloud Firestore. Campus students and staff can now view and match this item.
+          </p>
+          <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+            <a href="search.html" class="btn btn-primary">View in Search Directory</a>
+            <a href="dashboard.html" class="btn btn-secondary">Go to Dashboard</a>
+            <button onclick="window.location.reload()" class="btn btn-secondary">Report Another Item</button>
+          </div>
+        </div>
+
+        <!-- Lost Item Form -->
+        <form id="reportItemForm" data-report-type="lost">
+          <div class="form-grid">
+            <!-- Item Name -->
+            <div class="form-group form-group-full">
+              <label for="itemTitle" class="form-label">
+                Item Name / Title <span class="required">*</span>
+              </label>
+              <input type="text" id="itemTitle" class="form-control" placeholder="e.g. Casio fx-991EX Scientific Calculator" required>
+              <span class="form-help">Be clear and concise with the brand and model name.</span>
+            </div>
+
+            <!-- Category -->
+            <div class="form-group">
+              <label for="itemCategory" class="form-label">
+                Category <span class="required">*</span>
+              </label>
+              <select id="itemCategory" class="form-control" required>
+                <option value="">-- Select Item Category --</option>
+              </select>
+            </div>
+
+            <!-- Date Lost -->
+            <div class="form-group">
+              <label for="itemDate" class="form-label">
+                Date Lost <span class="required">*</span>
+              </label>
+              <input type="date" id="itemDate" class="form-control" required>
+            </div>
+
+            <!-- Campus Location Area -->
+            <div class="form-group">
+              <label for="locationArea" class="form-label">
+                Campus Location <span class="required">*</span>
+              </label>
+              <select id="locationArea" class="form-control" required>
+                <option value="">-- Select Campus Building/Area --</option>
+              </select>
+            </div>
+
+            <!-- Specific Location Details -->
+            <div class="form-group">
+              <label for="locationDetails" class="form-label">
+                Specific Location Details
+              </label>
+              <input type="text" id="locationDetails" class="form-control" placeholder="e.g. 2nd Floor reading desk #12, near elevator">
+            </div>
+
+            <!-- Description -->
+            <div class="form-group form-group-full">
+              <label for="itemDescription" class="form-label">
+                Detailed Description <span class="required">*</span>
+              </label>
+              <textarea id="itemDescription" class="form-control" placeholder="Describe color, size, case, brand, unique identifiers, stickers, scratches, or contents inside..." required></textarea>
+            </div>
+
+            <!-- Photo Upload Area -->
+            <div class="form-group form-group-full">
+              <label class="form-label">
+                Upload Photo (Optional)
+              </label>
+              <div id="fileUploadBox" class="file-upload-box">
+                <input type="file" id="itemPhoto" accept="image/jpeg,image/png,image/webp">
+                <div class="upload-box-content">
+                  <div class="upload-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                  </div>
+                  <div class="upload-text">Click to choose image or drag &amp; drop here</div>
+                  <div class="upload-subtext">Supports PNG, JPG, JPEG, WebP (Max 5MB)</div>
+                </div>
+                <div id="previewContainer" class="preview-container">
+                  <img id="previewImg" src="#" alt="Selected item photo preview">
+                  <button type="button" id="removePreviewBtn" class="preview-remove-btn" title="Remove image">&times;</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact Information Header -->
+            <div class="form-group-full" style="padding-top: 1rem; border-top: 1px solid var(--gray-200); margin-top: 0.5rem;">
+              <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--gray-800); margin-bottom: 0.25rem;">Contact Information</h3>
+              <p style="font-size: 0.85rem; color: var(--gray-500);">How can someone who finds your item get in touch?</p>
+            </div>
+
+            <!-- Contact Name -->
+            <div class="form-group">
+              <label for="contactName" class="form-label">
+                Your Full Name
+              </label>
+              <input type="text" id="contactName" class="form-control" placeholder="e.g. Rahul Sharma" value="Demo Student">
+            </div>
+
+            <!-- Contact Email -->
+            <div class="form-group">
+              <label for="contactEmail" class="form-label">
+                College Email Address <span class="required">*</span>
+              </label>
+              <input type="email" id="contactEmail" class="form-control" placeholder="e.g. student@campus.edu" value="demo.student@campus.edu" required>
+            </div>
+
+            <!-- Contact Phone -->
+            <div class="form-group form-group-full">
+              <label for="contactPhone" class="form-label">
+                Phone Number (Optional)
+              </label>
+              <input type="tel" id="contactPhone" class="form-control" placeholder="e.g. +91 98765 43210">
+            </div>
+          </div>
+
+          <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: flex-end;">
+            <a href="index.html" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-danger btn-lg">
+              Submit Lost Report
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="padding-top: 0; border: none;">
+        <div>&copy; 2026 CampusFind - College Lost & Found System.</div>
+        <div>Built with HTML5, CSS3, &amp; Vanilla JavaScript.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/mock-data.js"></script>
+  <script src="js/storage.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script type="module" src="js/firestore-service.js"></script>
+  <script src="js/main.js"></script>
+  <script type="module" src="js/forms.js"></script>
+</body>
+</html>
